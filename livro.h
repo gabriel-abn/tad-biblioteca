@@ -4,14 +4,6 @@ typedef struct data{
     int ano;
 }TData;
 
-typedef struct endereco{
-    char logradouro[100];
-    int numero;
-    char bairro[100];
-    char cidade[100];
-    char CEP[10];
-}TEndereco;
-
 typedef struct livro{
     char ISBN[20];
     char titulo[100];
