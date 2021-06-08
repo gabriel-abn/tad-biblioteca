@@ -21,5 +21,8 @@ typedef struct TipoUsuario
     TEndereco endereco;
     TData data_nascimento;
     char tipo_usuario;
-    char local_atuação[20];
+    char local_atuacao[40];
 }TUsuario;
+
+int CadastrarUsuario(TUsuario);
+void ImprimirUsuario(TUsuario);

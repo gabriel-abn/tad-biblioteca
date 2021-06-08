@@ -12,3 +12,6 @@ typedef struct TipoEmprestimo
     TData data_entrega;
     TData data_devolucao;
 }TEmprestimo;
+
+int CadastroEmprestimo(TEmprestimo);
+void ImprimirEmprestimo(TEmprestimo);

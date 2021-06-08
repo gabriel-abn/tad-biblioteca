@@ -20,3 +20,7 @@ typedef struct biblioteca{
     TLivro vetor[100];
     int indice; 
 }TBiblioteca;
+
+void IniciarVetor(TBiblioteca *);
+int Cadastrar(TBiblioteca *, TLivro );
+void Imprimir(TLivro );
