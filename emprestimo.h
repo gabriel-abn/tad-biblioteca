@@ -1,8 +1,9 @@
-typedef struct data{
-    int dia;
-    int mes;
-    int ano;
-}TData;
+#ifndef EMPRESTIMO_H_INCLUDED
+#define EMPRESTIMO_H_INCLUDED
+
+#include<stdio.h>
+#include<stdlib.h>
+#include "livro.h"
 
 typedef struct TipoEmprestimo
 {
@@ -15,3 +16,5 @@ typedef struct TipoEmprestimo
 
 int CadastroEmprestimo(TEmprestimo);
 void ImprimirEmprestimo(TEmprestimo);
+
+#endif

@@ -1,3 +1,9 @@
+#ifndef LIVRO_H_INCLUDED
+#define LIVRO_H_INCLUDED
+
+#include<stdio.h>
+#include<stdlib.h>
+
 typedef struct data{
     int dia;
     int mes;
@@ -19,8 +25,10 @@ typedef struct livro{
 typedef struct biblioteca{
     TLivro vetor[100];
     int indice; 
-}TBiblioteca;
+}TModuloBiblioteca;
 
-void IniciarVetor(TBiblioteca *);
-int Cadastrar(TBiblioteca *, TLivro );
+void IniciarVetor(TModuloBiblioteca *);
+int Cadastrar(TModuloBiblioteca *, TLivro );
 void Imprimir(TLivro );
+
+#endif

@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include "usuario.h"
 
-int CadastrarUsuario(TUsuario usuario)
+int CadastrarUsuario(TModuloUsuario usuario)
 {
     printf("\nCadastro de usuario:\n");
     printf("\nNome: ");
@@ -56,7 +56,7 @@ int CadastrarUsuario(TUsuario usuario)
     return 1;
 }
 
-void ImprimirUsuario(TUsuario usuario)
+void ImprimirUsuario(TModuloUsuario usuario)
 {
     printf("\nCadastro de usuario:\n");
     printf("\nNome: ");

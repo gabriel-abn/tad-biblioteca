@@ -3,12 +3,12 @@
 #include<string.h>
 #include "livro.h"
 
-void IniciarVetor(TBiblioteca *vetor)
+void IniciarVetor(TModuloBiblioteca *vetor)
 {
     vetor->indice = 0;
 }
 
-int Cadastrar(TBiblioteca *vetorLivro, TLivro livro)
+int Cadastrar(TModuloBiblioteca *vetorLivro, TLivro livro)
 {
     if (vetorLivro->indice < 99)
     {

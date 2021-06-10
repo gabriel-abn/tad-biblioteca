@@ -1,8 +1,9 @@
-typedef struct data{
-    int dia;
-    int mes;
-    int ano;
-}TData;
+#ifndef USUARIO_H_INCLUDED
+#define USUARIO_H_INCLUDED
+
+#include<stdio.h>
+#include<stdlib.h>
+#include"livro.h"
 
 typedef struct endereco{
     char logradouro[100];
@@ -22,7 +23,9 @@ typedef struct TipoUsuario
     TData data_nascimento;
     char tipo_usuario;
     char local_atuacao[40];
-}TUsuario;
+}TModuloUsuario;
 
-int CadastrarUsuario(TUsuario);
-void ImprimirUsuario(TUsuario);
+int CadastrarUsuario(TModuloUsuario);
+void ImprimirUsuario(TModuloUsuario);
+
+#endif
