@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "usuario.h"
 
 void IniciarVetorUsuario(TModuloUsuario *modulo_usuario)
@@ -109,4 +110,20 @@ void ImprimirTodosUsuarios(TModuloUsuario modulo_usuario)
         printf("\n");
     }
     
+}
+
+int PesquisaUsuario(TModuloUsuario modulo_usario, TUsuario search)
+{
+    for (int i = 0; i < modulo_usario.indice; i++)
+    {
+        if (strcmp(modulo_usario.vetor_usuario[i].CPF, search.CPF) == 0)
+        {
+            printf("\nUsuario encontrado!\n");
+            ImprimirUsuario(modulo_usario.vetor_usuario[i]);
+            printf("\n");
+            return 1;
+        }
+    }
+    printf("\nUsuario nao encontrado!\n");
+    return 0;
 }

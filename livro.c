@@ -95,15 +95,17 @@ void ImprimirTodosLivros(TModuloLivro modulo_livro)
     }
 }
 
-void PesquisarLivro(TModuloLivro modulo_livro, TLivro livro)
+int PesquisarLivro(TModuloLivro modulo_livro, TLivro livro)
 {
     for (int i = 0; i < modulo_livro.indice; i++)
     {
         if (strcmp(modulo_livro.vetor_livro[i].ISBN, livro.ISBN) == 0)
         {
+            print("\nLivro encontrado!\n");
             ImprimirLivro(modulo_livro.vetor_livro[i]);
-            return;
+            return 1;
         }
     }
     print("\nLivro nao encontrado!\n");
+    return 0;
 }

@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "emprestimo.h"
 
 void IniciarVetorEmprestimo(TModuloEmprestimo *modulo_emprestimo)
@@ -75,3 +76,18 @@ void ImprimirTodosEmprestimos(TModuloEmprestimo moduloEmprestimo)
     
 }
 
+int PesquisarEmprestimo(TModuloEmprestimo modulo_emprestimo, TEmprestimo search)
+{
+    for (int i = 0; i < modulo_emprestimo.indice; i++)
+    {
+        if (strcmp(modulo_emprestimo.vetor_emprestimo[i].CPF, search.CPF) == 0 ||
+        strcmp(modulo_emprestimo.vetor_emprestimo[i].ISBN, search.ISBN) == 0)
+        {
+            printf("\nEmprestimo encontrado!\n");
+            ImprimirEmprestimo(modulo_emprestimo.vetor_emprestimo[i]);
+            return 1;
+        }
+    }
+    printf("\nEmprestimo nao encontrado!\n");
+    return 0;
+}
