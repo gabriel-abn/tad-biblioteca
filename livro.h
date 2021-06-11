@@ -23,12 +23,14 @@ typedef struct livro{
 }TLivro;
 
 typedef struct biblioteca{
-    TLivro vetor[100];
+    TLivro vetor_livro[100];
     int indice; 
-}TModuloBiblioteca;
+}TModuloLivro;
 
-void IniciarVetor(TModuloBiblioteca *);
-int Cadastrar(TModuloBiblioteca *, TLivro );
-void Imprimir(TLivro );
+void IniciarVetorLivro(TModuloLivro *);
+void LeituraLivro(TLivro *);
+int CadastrarLivro(TModuloLivro *, TLivro );
+void ImprimirLivro(TLivro );
+void ImprimirTodosLivros(TModuloLivro );
 
 #endif

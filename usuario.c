@@ -2,61 +2,74 @@
 #include<stdlib.h>
 #include "usuario.h"
 
-int CadastrarUsuario(TModuloUsuario usuario)
+void IniciarVetorUsuario(TModuloUsuario *modulo_usuario)
+{
+    modulo_usuario->indice = 0;
+}
+
+void LerUsuario(TUsuario *usuario)
 {
     printf("\nCadastro de usuario:\n");
     printf("\nNome: ");
     fflush(stdin);
-    fgets(usuario.nome, 30, stdin);
+    fgets(usuario->nome, 30, stdin);
     printf("\nSobrenome: ");
     fflush(stdin);
-    fgets(usuario.sobrenome, 30, stdin);
+    fgets(usuario->sobrenome, 30, stdin);
     printf("\nCPF: ");
     fflush(stdin);
-    fgets(usuario.CPF, 15, stdin);
+    fgets(usuario->CPF, 15, stdin);
     printf("\nIdentidade: ");
     fflush(stdin);
-    fgets(usuario.ID, 15, stdin);
+    fgets(usuario->ID, 15, stdin);
 
     printf("Data de Nascimento:\n");
     printf("Dia: ");
     fflush(stdin);
-    scanf("%d", &usuario.data_nascimento.dia);
+    scanf("%d", &(usuario->data_nascimento.dia));
     printf("Mes: ");
     fflush(stdin);
-    scanf("%d", &usuario.data_nascimento.mes);
+    scanf("%d", &(usuario->data_nascimento.mes));
     printf("Ano: ");
     fflush(stdin);
-    scanf("%d", &usuario.data_nascimento.ano);
+    scanf("%d", &(usuario->data_nascimento.ano));
 
     printf("\nEndereco:\n");
     printf("Logradouro: ");
     fflush(stdin);
-    fgets(usuario.endereco.logradouro, 100, stdin);
+    fgets(usuario->endereco.logradouro, 100, stdin);
     printf("\nNumero: ");
     fflush(stdin);
-    scanf("%d", &usuario.endereco.numero);
+    scanf("%d", &usuario->endereco.numero);
     printf("\nBairro: ");
     fflush(stdin);
-    fgets(usuario.endereco.bairro, 100, stdin);
+    fgets(usuario->endereco.bairro, 100, stdin);
     printf("\nCidade: ");
     fflush(stdin);
-    fgets(usuario.endereco.cidade, 100, stdin);
+    fgets(usuario->endereco.cidade, 100, stdin);
     printf("\nCEP: ");
     fflush(stdin);
-    fgets(usuario.endereco.CEP, 10, stdin);
+    fgets(usuario->endereco.CEP, 10, stdin);
 
     printf("\nTipo de usuario: ");
     fflush(stdin);
-    scanf("%d", &usuario.tipo_usuario);
+    scanf("%d", &(usuario->tipo_usuario));
     printf("\nLocal de atuacao: ");
     fflush(stdin);
-    fgets(usuario.nome, 40, stdin);
-
-    return 1;
+    fgets(usuario->nome, 40, stdin);
 }
 
-void ImprimirUsuario(TModuloUsuario usuario)
+int CadastrarUsuario(TModuloUsuario *modulo_usuario, TUsuario usuario)
+{
+    if (modulo_usuario->indice < 99)
+    {
+        modulo_usuario->vetor_usuario[modulo_usuario->indice] = usuario;
+        return 1;
+    }
+    return 0;
+}
+
+void ImprimirUsuario(TUsuario usuario)
 {
     printf("\nCadastro de usuario:\n");
     printf("\nNome: ");
@@ -85,4 +98,15 @@ void ImprimirUsuario(TModuloUsuario usuario)
     printf("\nTipo de usuario: %d", usuario.tipo_usuario);
     printf("\nLocal de atuacao: ");
     puts(usuario.nome);
+}
+
+void ImprimirTodosUsuarios(TModuloUsuario modulo_usuario)
+{
+    for (int i = 0; i < modulo_usuario.indice; i++)
+    {
+        printf("\nUsuario %d:\n");
+        ImprimirUsuario(modulo_usuario.vetor_usuario[i]);
+        printf("\n");
+    }
+    
 }

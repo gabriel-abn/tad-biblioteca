@@ -2,7 +2,12 @@
 #include<stdlib.h>
 #include "emprestimo.h"
 
-int CadastroEmprestimo(TEmprestimo emprestimo)
+void IniciarVetorEmprestimo(TModuloEmprestimo *modulo_emprestimo)
+{
+    modulo_emprestimo->indice = 0;
+}
+
+int LerEmprestimo(TEmprestimo emprestimo)
 {
     printf("\nCPF do usuario: \n");
     fflush(stdin);
@@ -34,6 +39,17 @@ int CadastroEmprestimo(TEmprestimo emprestimo)
     scanf("%d", &emprestimo.data_entrega.ano);
 }
 
+int CadastrarEmprestimo(TModuloEmprestimo *modulo_emprestimo, TEmprestimo input)
+{
+    if (modulo_emprestimo->indice < 99)
+    {
+        modulo_emprestimo->vetor_emprestimo[modulo_emprestimo->indice] = input;
+        return 1;
+    }
+    
+    return 0;
+}
+
 void ImprimirEmprestimo(TEmprestimo emprestimo)
 {
     printf("\nCPF do usuario: \n");
@@ -47,3 +63,15 @@ void ImprimirEmprestimo(TEmprestimo emprestimo)
     printf("\nData de entrega: \n");
     printf("\n%d/%d/%d\n", emprestimo.data_entrega.dia, emprestimo.data_entrega.mes, emprestimo.data_entrega.ano);
 }
+
+void ImprimirTodosEmprestimos(TModuloEmprestimo moduloEmprestimo)
+{
+    for (int i = 0; i < moduloEmprestimo.indice; i++)
+    {
+        printf("\nEmprestimo %d\n");
+        ImprimirEmprestimo(moduloEmprestimo.vetor_emprestimo[i]);
+        printf("\n");
+    }
+    
+}
+

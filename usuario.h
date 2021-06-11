@@ -23,9 +23,18 @@ typedef struct TipoUsuario
     TData data_nascimento;
     char tipo_usuario;
     char local_atuacao[40];
+}TUsuario;
+
+typedef struct ModuloUsuario
+{
+    TUsuario vetor_usuario[100];
+    int indice;
 }TModuloUsuario;
 
-int CadastrarUsuario(TModuloUsuario);
-void ImprimirUsuario(TModuloUsuario);
+void IniciarVetorUsuario(TModuloUsuario *);
+void LerUsuario(TUsuario *);
+int CadastrarUsuario(TModuloUsuario*, TUsuario);
+void ImprimirUsuario(TUsuario);
+void ImprimirTodosUsuarios(TModuloUsuario);
 
 #endif

@@ -14,7 +14,16 @@ typedef struct TipoEmprestimo
     TData data_devolucao;
 }TEmprestimo;
 
-int CadastroEmprestimo(TEmprestimo);
-void ImprimirEmprestimo(TEmprestimo);
+typedef struct Modulo_emprestimo
+{
+    TEmprestimo vetor_emprestimo[100];
+    int indice;
+}TModuloEmprestimo;
+
+void IniciarVetorEmprestimo(TModuloEmprestimo *);
+int LerEmprestimo(TEmprestimo );
+int CadastrarEmprestimo(TModuloEmprestimo *, TEmprestimo );
+void ImprimirEmprestimo(TEmprestimo );
+void ImprimirTodosEmprestimos(TModuloEmprestimo );
 
 #endif
