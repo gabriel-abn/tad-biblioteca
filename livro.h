@@ -32,5 +32,6 @@ void LeituraLivro(TLivro *);
 int CadastrarLivro(TModuloLivro *, TLivro );
 void ImprimirLivro(TLivro );
 void ImprimirTodosLivros(TModuloLivro );
+int PesquisarLivro(TModuloLivro, TLivro);
 
 #endif

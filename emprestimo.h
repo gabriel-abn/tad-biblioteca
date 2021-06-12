@@ -25,5 +25,6 @@ int LerEmprestimo(TEmprestimo );
 int CadastrarEmprestimo(TModuloEmprestimo *, TEmprestimo );
 void ImprimirEmprestimo(TEmprestimo );
 void ImprimirTodosEmprestimos(TModuloEmprestimo );
+int PesquisarEmprestimo(TModuloEmprestimo, TEmprestimo);
 
 #endif
