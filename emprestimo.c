@@ -8,36 +8,36 @@ void IniciarVetorEmprestimo(TModuloEmprestimo *modulo_emprestimo)
     modulo_emprestimo->indice = 0;
 }
 
-int LerEmprestimo(TEmprestimo emprestimo)
+int LerEmprestimo(TEmprestimo *emprestimo)
 {
     printf("\nCPF do usuario: \n");
     fflush(stdin);
-    fgets(emprestimo.CPF, 15, stdin);
+    fgets(emprestimo->CPF, 15, stdin);
     printf("\nISBN do livro: \n");
     fflush(stdin);
-    fgets(emprestimo.ISBN, 20, stdin);
+    fgets(emprestimo->ISBN, 20, stdin);
 
     printf("\nData de emprestimo: \n");
     printf("Dia: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_emprestimo.dia);
+    scanf("%d", &(emprestimo->data_emprestimo.dia));
     printf("Mes: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_emprestimo.mes);
+    scanf("%d", &(emprestimo->data_emprestimo.mes));
     printf("Ano: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_emprestimo.ano);
+    scanf("%d", &(emprestimo->data_emprestimo.ano));
 
     printf("\nData de entrega: \n");
     printf("Dia: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_entrega.dia);
+    scanf("%d", &(emprestimo->data_entrega.dia));
     printf("Mes: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_entrega.mes);
+    scanf("%d", &(emprestimo->data_entrega.mes));
     printf("Ano: ");
     fflush(stdin);
-    scanf("%d", &emprestimo.data_entrega.ano);
+    scanf("%d", &(emprestimo->data_entrega.ano));
 }
 
 int CadastrarEmprestimo(TModuloEmprestimo *modulo_emprestimo, TEmprestimo input)

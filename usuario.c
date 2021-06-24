@@ -11,16 +11,16 @@ void IniciarVetorUsuario(TModuloUsuario *modulo_usuario)
 void LerUsuario(TUsuario *usuario)
 {
     printf("\nCadastro de usuario:\n");
-    printf("\nNome: ");
+    printf("Nome: ");
     fflush(stdin);
     fgets(usuario->nome, 30, stdin);
-    printf("\nSobrenome: ");
+    printf("Sobrenome: ");
     fflush(stdin);
     fgets(usuario->sobrenome, 30, stdin);
-    printf("\nCPF: ");
+    printf("CPF: ");
     fflush(stdin);
     fgets(usuario->CPF, 15, stdin);
-    printf("\nIdentidade: ");
+    printf("Identidade: ");
     fflush(stdin);
     fgets(usuario->ID, 15, stdin);
 
@@ -39,23 +39,23 @@ void LerUsuario(TUsuario *usuario)
     printf("Logradouro: ");
     fflush(stdin);
     fgets(usuario->endereco.logradouro, 100, stdin);
-    printf("\nNumero: ");
+    printf("Numero: ");
     fflush(stdin);
     scanf("%d", &usuario->endereco.numero);
-    printf("\nBairro: ");
+    printf("Bairro: ");
     fflush(stdin);
     fgets(usuario->endereco.bairro, 100, stdin);
-    printf("\nCidade: ");
+    printf("Cidade: ");
     fflush(stdin);
     fgets(usuario->endereco.cidade, 100, stdin);
-    printf("\nCEP: ");
+    printf("CEP: ");
     fflush(stdin);
     fgets(usuario->endereco.CEP, 10, stdin);
 
-    printf("\nTipo de usuario: ");
+    printf("Tipo de usuario: ");
     fflush(stdin);
     scanf("%d", &(usuario->tipo_usuario));
-    printf("\nLocal de atuacao: ");
+    printf("Local de atuacao: ");
     fflush(stdin);
     fgets(usuario->nome, 40, stdin);
 }
@@ -65,6 +65,7 @@ int CadastrarUsuario(TModuloUsuario *modulo_usuario, TUsuario usuario)
     if (modulo_usuario->indice < 99)
     {
         modulo_usuario->vetor_usuario[modulo_usuario->indice] = usuario;
+        modulo_usuario->indice++;
         return 1;
     }
     return 0;
@@ -72,32 +73,31 @@ int CadastrarUsuario(TModuloUsuario *modulo_usuario, TUsuario usuario)
 
 void ImprimirUsuario(TUsuario usuario)
 {
-    printf("\nCadastro de usuario:\n");
-    printf("\nNome: ");
+    printf("Nome: ");
     puts(usuario.nome);
-    printf("\nSobrenome: ");
+    printf("Sobrenome: ");
     puts(usuario.sobrenome);
-    printf("\nCPF: ");
+    printf("CPF: ");
     puts(usuario.CPF);
-    printf("\nIdentidade: ");
+    printf("Identidade: ");
     puts(usuario.ID);
 
-    printf("Data de Nascimento:\n");
-    printf("\n%d/%d/%d\n", usuario.data_nascimento.dia, usuario.data_nascimento.mes, usuario.data_nascimento.ano);
+    printf("Data de Nascimento: ");
+    printf("%d/%d/%d", usuario.data_nascimento.dia, usuario.data_nascimento.mes, usuario.data_nascimento.ano);
 
     printf("\nEndereco:\n");
-    printf("\nLogradouro: ");
+    printf("Logradouro: ");
     puts(usuario.endereco.logradouro);
-    printf("\nNumero: %d\n", usuario.endereco.numero);
-    printf("\nBairro: ");
+    printf("Numero: %d\n", usuario.endereco.numero);
+    printf("Bairro: ");
     puts(usuario.endereco.bairro);
-    printf("\nCidade: ");
+    printf("Cidade: ");
     puts(usuario.endereco.cidade);
-    printf("\nCEP: ");
+    printf("CEP: ");
     puts(usuario.endereco.CEP);
 
-    printf("\nTipo de usuario: %d", usuario.tipo_usuario);
-    printf("\nLocal de atuacao: ");
+    printf("\nTipo de usuario: %d\n", usuario.tipo_usuario);
+    printf("Local de atuacao: ");
     puts(usuario.nome);
 }
 
@@ -105,8 +105,9 @@ void ImprimirTodosUsuarios(TModuloUsuario modulo_usuario)
 {
     for (int i = 0; i < modulo_usuario.indice; i++)
     {
-        printf("\nUsuario %d:\n");
+        printf("\nUsuario %d\n", i);
         ImprimirUsuario(modulo_usuario.vetor_usuario[i]);
+        printf("-----------------------------");
         printf("\n");
     }
     
@@ -119,11 +120,60 @@ int PesquisaUsuario(TModuloUsuario modulo_usario, TUsuario search)
         if (strcmp(modulo_usario.vetor_usuario[i].CPF, search.CPF) == 0)
         {
             printf("\nUsuario encontrado!\n");
-            ImprimirUsuario(modulo_usario.vetor_usuario[i]);
-            printf("\n");
-            return 1;
+            return i;
         }
     }
-    printf("\nUsuario nao encontrado!\n");
+    return -1;
+}
+
+int AlterarUsuario(TModuloUsuario *modulo, TUsuario alter, int index)
+{
+    if (index != -1)
+    {
+        modulo->vetor_usuario[index] = alter;
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int ExcluirUsuario(TModuloUsuario *modulo, int index)
+{
+    char resp = 's';
+
+    if (index != -1)
+    {
+        printf("\nUsuario encontrado!\n");
+        ImprimirUsuario(modulo->vetor_usuario[index]);
+        printf("\nDeseja excluir usuario do sistema? s para SIM - n para NAO\n");
+        printf("Resposta: ");
+        fflush(stdin);
+        scanf("%c", &resp);
+
+        if (resp == 's')
+        {
+            for (int j = index; j < modulo->indice; j++)
+            {
+                modulo->vetor_usuario[j] = modulo->vetor_usuario[j+1];
+            }
+            modulo->indice--;      
+            return 1;
+        } else
+        if (resp == 'n')
+        {
+            system("PAUSE");
+            printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
+            return 1;
+        }
+        else
+        {
+            printf("\n\n\t >>>>> MSG: Opcao invalida <<<<< \n\n\t");
+            system("PAUSE");
+            printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
+        }
+        printf("\n");
+    }
     return 0;
 }

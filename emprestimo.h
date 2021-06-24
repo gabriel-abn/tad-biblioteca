@@ -21,7 +21,7 @@ typedef struct Modulo_emprestimo
 }TModuloEmprestimo;
 
 void IniciarVetorEmprestimo(TModuloEmprestimo *);
-int LerEmprestimo(TEmprestimo );
+int LerEmprestimo(TEmprestimo *);
 int CadastrarEmprestimo(TModuloEmprestimo *, TEmprestimo );
 void ImprimirEmprestimo(TEmprestimo );
 void ImprimirTodosEmprestimos(TModuloEmprestimo );

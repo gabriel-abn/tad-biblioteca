@@ -11,16 +11,16 @@ void IniciarVetorLivro(TModuloLivro *modulo_livro)
 void LeituraLivro(TLivro *livro)
 {
     printf("\nDigite as informacoes para cadastro do livro:\n");
-    printf("\nTitulo: ");
+    printf("Titulo: ");
     fflush(stdin);
     fgets(livro->titulo, 100, stdin);
-    printf("\nISBN: ");
+    printf("ISBN: ");
     fflush(stdin);
     fgets(livro->ISBN, 20, stdin);
-    printf("\nEditora: ");
+    printf("Editora: ");
     fflush(stdin);
     fgets(livro->editora, 100, stdin);
-    printf("\nLocal: ");
+    printf("Local: ");
     fflush(stdin);
     fgets(livro->local, 100, stdin);
 
@@ -35,10 +35,10 @@ void LeituraLivro(TLivro *livro)
     fflush(stdin);
     scanf("%d", &(livro->data_pub.ano));
 
-    printf("\nPrimeiro autor: ");
+    printf("Primeiro autor: ");
     fflush(stdin);
     fgets(livro->prim_autor, 100, stdin);
-    printf("\nSegundo autor: ");
+    printf("Segundo autor: ");
     fflush(stdin);
     fgets(livro->seg_autor, 100, stdin);
 
@@ -64,21 +64,21 @@ int CadastrarLivro(TModuloLivro *modulo_livro, TLivro livro)
 
 void ImprimirLivro(TLivro livro)
 {
-    printf("\nTitulo: ");
+    printf("Titulo: ");
     puts(livro.titulo);
-    printf("\nISBN: ");
+    printf("ISBN: ");
     puts(livro.ISBN);
-    printf("\nEditora: ");
+    printf("Editora: ");
     puts(livro.editora);
-    printf("\nLocal: ");
+    printf("Local: ");
     puts(livro.local);
 
-    printf("\nPublicacao:\n");
+    printf("Publicacao: ");
     printf("%d/%d/%d", livro.data_pub.dia, livro.data_pub.mes, livro.data_pub.ano);
 
-    printf("\nPrimeiro autor: ");
+    printf("Primeiro autor: ");
     puts(livro.prim_autor);
-    printf("\nSegundo autor: ");
+    printf("Segundo autor: ");
     puts(livro.seg_autor);
 
     printf("Quantidade: %d\n", livro.quantidade - livro.quant_emprestados);
@@ -89,9 +89,9 @@ void ImprimirTodosLivros(TModuloLivro modulo_livro)
 {
     for (int i = 0; i < modulo_livro.indice; i++)
     {
-        printf("\nLivro %d:\n");
+        printf("\nLivro %d:\n", i);
         ImprimirLivro(modulo_livro.vetor_livro[i]);
-        print("\n");
+        printf("\n-------------------------");
     }
 }
 
@@ -101,11 +101,9 @@ int PesquisarLivro(TModuloLivro modulo_livro, TLivro livro)
     {
         if (strcmp(modulo_livro.vetor_livro[i].ISBN, livro.ISBN) == 0)
         {
-            print("\nLivro encontrado!\n");
             ImprimirLivro(modulo_livro.vetor_livro[i]);
-            return 1;
+            return i;
         }
     }
-    print("\nLivro nao encontrado!\n");
-    return 0;
+    return -1;
 }

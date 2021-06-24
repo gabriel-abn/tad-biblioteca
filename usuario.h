@@ -37,5 +37,7 @@ int CadastrarUsuario(TModuloUsuario*, TUsuario);
 void ImprimirUsuario(TUsuario);
 void ImprimirTodosUsuarios(TModuloUsuario);
 int PesquisaUsuario(TModuloUsuario, TUsuario);
+int AlterarUsuario(TModuloUsuario *, TUsuario, int);
+int ExcluirUsuario(TModuloUsuario *, int);
 
 #endif
