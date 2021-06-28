@@ -52,18 +52,24 @@ void LerUsuario(TUsuario *usuario)
     fflush(stdin);
     fgets(usuario->endereco.CEP, 10, stdin);
 
+    printf("\n1 - Aluno\n2 - Professor\n3 - Funcionario\n");
     printf("Tipo de usuario: ");
     fflush(stdin);
     scanf("%d", &(usuario->tipo_usuario));
-    printf("Local de atuacao: ");
-    fflush(stdin);
-    fgets(usuario->nome, 40, stdin);
+    if (usuario->tipo_usuario == 2 || usuario->tipo_usuario == 3)
+    {    
+        printf("Local de atuacao: ");
+        fflush(stdin);
+        fgets(usuario->nome, 40, stdin);
+    }
 }
 
 int CadastrarUsuario(TModuloUsuario *modulo_usuario, TUsuario usuario)
 {
     if (modulo_usuario->indice < 99)
     {
+        usuario.debito = 0;
+        usuario.livros_obtidos = 0;
         modulo_usuario->vetor_usuario[modulo_usuario->indice] = usuario;
         modulo_usuario->indice++;
         return 1;
@@ -83,7 +89,7 @@ void ImprimirUsuario(TUsuario usuario)
     puts(usuario.ID);
 
     printf("Data de Nascimento: ");
-    printf("%d/%d/%d", usuario.data_nascimento.dia, usuario.data_nascimento.mes, usuario.data_nascimento.ano);
+    printf("%d/%d/%d\n", usuario.data_nascimento.dia, usuario.data_nascimento.mes, usuario.data_nascimento.ano);
 
     printf("\nEndereco:\n");
     printf("Logradouro: ");
@@ -96,9 +102,23 @@ void ImprimirUsuario(TUsuario usuario)
     printf("CEP: ");
     puts(usuario.endereco.CEP);
 
-    printf("\nTipo de usuario: %d\n", usuario.tipo_usuario);
-    printf("Local de atuacao: ");
-    puts(usuario.nome);
+    printf("\nTipo de usuario: ", usuario.tipo_usuario);
+    if (usuario.tipo_usuario == 1)
+    {
+        printf("Aluno\n");
+    }
+    if (usuario.tipo_usuario == 2)
+    {
+        printf("Professor(a)\n");
+        printf("Local de atuacao: ");
+        puts(usuario.nome);
+    }
+    if (usuario.tipo_usuario == 3)
+    {
+        printf("Funcionario(a)\n");
+        printf("Local de atuacao: ");
+        puts(usuario.nome);
+    }
 }
 
 void ImprimirTodosUsuarios(TModuloUsuario modulo_usuario)
@@ -109,8 +129,7 @@ void ImprimirTodosUsuarios(TModuloUsuario modulo_usuario)
         ImprimirUsuario(modulo_usuario.vetor_usuario[i]);
         printf("-----------------------------");
         printf("\n");
-    }
-    
+    } 
 }
 
 int PesquisaUsuario(TModuloUsuario modulo_usario, TUsuario search)

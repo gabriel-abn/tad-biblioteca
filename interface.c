@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "interface.h"
 #include "livro.h"
 #include "usuario.h"
@@ -11,7 +12,8 @@ void MSG_MENU()
     printf("\n\n\t1. GERENCIAMENTO DE LIVROS ");
     printf("\n\t2. GERENCIAMENTO DE USUARIO");
     printf("\n\t3. GERENCIAMENTO DE EMPRESTIMO");
-    printf("\n\t4. SAIR");
+    printf("\n\t4. SERVICOS");
+    printf("\n\t5. SAIR");
 }
 
 void MSG_SUBMENU(int opcao)
@@ -21,34 +23,48 @@ void MSG_SUBMENU(int opcao)
     {
     case 1:
         printf("\n\n\t >>>>>>>>>> GERENCIAMENTO DE LIVROS <<<<<<<<<<");
+        printf("\n\n\t1. CADASTRAR");
+        printf("\n\t2. PESQUISAR");
+        printf("\n\t3. ALTERAR");
+        printf("\n\t4. EXCLUIR");
+        printf("\n\t5. IMPRIMIR TODOS");
+        printf("\n\t6. SAIR");
         break;
     case 2:
         printf("\n\n\t >>>>>>>>>> GERENCIAMENTO DE USUARIOS <<<<<<<<<<");
+        printf("\n\n\t1. CADASTRAR");
+        printf("\n\t2. PESQUISAR");
+        printf("\n\t3. ALTERAR");
+        printf("\n\t4. EXCLUIR");
+        printf("\n\t5. IMPRIMIR TODOS");
+        printf("\n\t6. SAIR");
         break;
     case 3:
         printf("\n\n\t >>>>>>>>>> GERENCIAMENTO DE EMPRESTIMOS <<<<<<<<<<");
+        printf("\n\n\t1. CADASTRAR");
+        printf("\n\t2. PESQUISAR");
+        printf("\n\t3. ALTERAR");
+        printf("\n\t4. EXCLUIR");
+        printf("\n\t5. IMPRIMIR TODOS");
+        printf("\n\t6. SAIR");
         break;
-    
+    case 4:
+        printf("\n\n\t1. FAZER PAGAMENTO DE MULTA");
+        printf("\n\t2. PESQUISAR");
+        printf("\n\t3. ALTERAR");
+        printf("\n\t4. EXCLUIR");
+        printf("\n\t5. IMPRIMIR TODOS");
+        printf("\n\t6. SAIR");
+        break;
     default:
         break;
     }
-    printf("\n\n\t1. CADASTRAR");
-    printf("\n\t2. PESQUISAR");
-    printf("\n\t3. ALTERAR");
-    printf("\n\t4. EXCLUIR");
-    printf("\n\t5. IMPRIMIR TODOS");
-    printf("\n\t6. SAIR");
-}
-
-void MENU()
-{
-    
-    
 }
 
 void SubMenu_Modulo1(TModuloLivro *modulo, TLivro input)
 {
     int opcao = 0;
+    int index;
     do
     {
         MSG_SUBMENU(1);
@@ -77,7 +93,8 @@ void SubMenu_Modulo1(TModuloLivro *modulo, TLivro input)
                 printf("\nInsira o ISBN a ser pesquisado: ");
                 fflush(stdin);
                 fgets(input.ISBN, 20, stdin);
-                if (PesquisarLivro(*modulo, input))
+                index = PesquisarLivro(*modulo, input);
+                if (index != -1)
                 {
                     printf("\nLivro encontrado!\n");
                     system("PAUSE");
@@ -91,13 +108,57 @@ void SubMenu_Modulo1(TModuloLivro *modulo, TLivro input)
                 }
                 break;
             case 3:
-                
+                printf("\nInsira o ISBN a ser pesquisado: ");
+                fflush(stdin);
+                fgets(input.ISBN, 15, stdin);
+                index = PesquisarLivro(*modulo, input);
+                if (index != -1)
+                {
+                    LeituraLivro(&input);
+                    if (AlterarLivro(modulo, input, index))
+                    {
+                        printf("\nLivro alterado com sucesso!\n");
+                    }
+                    else
+                    {
+                        printf("\nErro ao alterar livro!\n");
+                    }
+                }
+                else
+                {
+                    printf("\nLivro nao encontrado!\n");
+                }
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 4:
-                
+                printf("\nInsira o ISBN a ser pesquisado: ");
+                fflush(stdin);
+                fgets(input.ISBN, 20, stdin);
+                index = PesquisarLivro(*modulo, input);
+                if (index != -1)
+                {
+                    if (ExcluirLivro(modulo, index))
+                    {
+                        printf("\nLivro excluido com sucesso!\n");
+                    }
+                    else
+                    {
+                        printf("\nErro ao excluir livro!\n");
+                    }
+                }
+                else
+                {
+                    printf("\nLivro nao encontrado!\n");
+                }
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
+                break;
                 break;
             case 5:
-                
+                ImprimirTodosLivros(*modulo);
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 6:
                 system("cls");
@@ -232,6 +293,7 @@ void SubMenu_Modulo3(TModuloEmprestimo *modulo, TEmprestimo input)
 {
     int opcao = 0;
     int opcao2 = 0;
+    int index;
     do
     {
         MSG_SUBMENU(3);
@@ -250,8 +312,12 @@ void SubMenu_Modulo3(TModuloEmprestimo *modulo, TEmprestimo input)
                 {
                     printf("\n\nMSG: Erro no registro, Banco de dados cheio.");
                 }
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 2:
+                printf("\n1 - CPF");
+                printf("\n2 - ISBN");
                 printf("\nInsira uma opcao: ");
                 scanf("%d", &opcao2);
                 do
@@ -266,29 +332,35 @@ void SubMenu_Modulo3(TModuloEmprestimo *modulo, TEmprestimo input)
                     {
                         printf("\nInsira o ISBN a ser pesquisado: ");
                         fflush(stdin);
-                        fgets(input.ISBN, 15, stdin);
+                        fgets(input.ISBN, 20, stdin);
                     } else
                         printf("\nMSG: Opcao invalida...\n");
-                } while (opcao2 != 1 || opcao2 != 2);
+                } while (opcao2 != 1 && opcao2 != 2);
                 
-                
-                if (PesquisarEmprestimo(*modulo, input))
+                index = PesquisarEmprestimo(*modulo, input);
+                if (index != -1)
                 {
-                    printf("\nEmprestimo encontrado!\n");
+                    ImprimirEmprestimo(modulo->vetor_emprestimo[index]);
                 }
                 else
                 {
                     printf("\nEmprestimo nao encontrado!\n");
                 }
+                
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 3:
-                
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 4:
-                
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 5:
-                
+                system("PAUSE");
+                printf("\n\n\t >>>>> MSG: Pressione uma tecla para continuar <<<<< \n\n\t");
                 break;
             case 6:
                 system("cls");

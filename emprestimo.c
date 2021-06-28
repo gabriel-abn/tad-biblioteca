@@ -45,6 +45,7 @@ int CadastrarEmprestimo(TModuloEmprestimo *modulo_emprestimo, TEmprestimo input)
     if (modulo_emprestimo->indice < 99)
     {
         modulo_emprestimo->vetor_emprestimo[modulo_emprestimo->indice] = input;
+        modulo_emprestimo->indice++;
         return 1;
     }
     
@@ -53,16 +54,16 @@ int CadastrarEmprestimo(TModuloEmprestimo *modulo_emprestimo, TEmprestimo input)
 
 void ImprimirEmprestimo(TEmprestimo emprestimo)
 {
-    printf("\nCPF do usuario: \n");
+    printf("\nCPF do usuario: ");
     puts(emprestimo.CPF);
-    printf("\nISBN do livro: \n");
+    printf("ISBN do livro: ");
     puts(emprestimo.ISBN);
 
-    printf("\nData de emprestimo: \n");
-    printf("\n%d/%d/%d\n", emprestimo.data_emprestimo.dia, emprestimo.data_emprestimo.mes, emprestimo.data_emprestimo.ano);
+    printf("\nData de emprestimo: ");
+    printf("%d/%d/%d\n", emprestimo.data_emprestimo.dia, emprestimo.data_emprestimo.mes, emprestimo.data_emprestimo.ano);
 
-    printf("\nData de entrega: \n");
-    printf("\n%d/%d/%d\n", emprestimo.data_entrega.dia, emprestimo.data_entrega.mes, emprestimo.data_entrega.ano);
+    printf("\nData de entrega: ");
+    printf("%d/%d/%d\n", emprestimo.data_entrega.dia, emprestimo.data_entrega.mes, emprestimo.data_entrega.ano);
 }
 
 void ImprimirTodosEmprestimos(TModuloEmprestimo moduloEmprestimo)
@@ -85,9 +86,8 @@ int PesquisarEmprestimo(TModuloEmprestimo modulo_emprestimo, TEmprestimo search)
         {
             printf("\nEmprestimo encontrado!\n");
             ImprimirEmprestimo(modulo_emprestimo.vetor_emprestimo[i]);
-            return 1;
+            return i;
         }
     }
-    printf("\nEmprestimo nao encontrado!\n");
-    return 0;
+    return -1;
 }

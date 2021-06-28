@@ -33,5 +33,7 @@ int CadastrarLivro(TModuloLivro *, TLivro );
 void ImprimirLivro(TLivro );
 void ImprimirTodosLivros(TModuloLivro );
 int PesquisarLivro(TModuloLivro, TLivro);
+int AlterarLivro(TModuloLivro *, TLivro , int );
+int ExcluirLivro(TModuloLivro *, int );
 
 #endif

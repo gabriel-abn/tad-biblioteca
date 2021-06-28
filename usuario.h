@@ -21,8 +21,10 @@ typedef struct TipoUsuario
     char ID[15];
     TEndereco endereco;
     TData data_nascimento;
-    char tipo_usuario;
+    int tipo_usuario;
     char local_atuacao[40];
+    float debito;
+    int livros_obtidos;
 }TUsuario;
 
 typedef struct ModuloUsuario
